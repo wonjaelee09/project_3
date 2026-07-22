@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
+data/raw/AB_NYC_2019.csv
+models/*.joblib
+.env
+GITHUB_TOKEN.env

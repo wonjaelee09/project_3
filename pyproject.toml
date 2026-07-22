@@ -1,0 +1,18 @@
+[project]
+name = "nyc-airbnb-availability-classification"
+version = "1.0.0"
+description = "End-to-end NYC Airbnb availability classification project aligned to marketplace data science work."
+requires-python = ">=3.10"
+dependencies = [
+  "pandas>=2.0",
+  "numpy>=1.24",
+  "matplotlib>=3.7",
+  "seaborn>=0.12",
+  "scikit-learn>=1.3",
+  "joblib>=1.3",
+  "tabulate>=0.9"
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

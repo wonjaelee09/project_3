@@ -1,0 +1,15 @@
+{
+  "raw_rows": 48895,
+  "model_rows": 48884,
+  "removed_zero_price_rows": 11,
+  "target_positive_rate": 0.32323459618689143,
+  "missing_reviews_per_month_raw": 10052,
+  "missing_last_review_raw": 10052,
+  "borough_counts": {
+    "Manhattan": 21660,
+    "Brooklyn": 20095,
+    "Queens": 5666,
+    "Bronx": 1090,
+    "Staten Island": 373
+  }
+}
