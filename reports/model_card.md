@@ -1,36 +1,35 @@
-# Model Card — High Availability Classifier
-
-## Model purpose
-Predict whether a listing has more than 165 available days in the year.
+# Model Card — Airbnb Experiences Incrementality Simulation
 
 ## Intended use
-- Prioritize marketplace operations review.
-- Identify supply segments needing pricing, merchandising, or host-quality interventions.
-- Support exploratory marketplace-health analysis.
+
+Portfolio simulation for Airbnb MarTech Measurement. Demonstrates how to combine public Airbnb-adjacent demand proxies with a synthetic marketing experiment layer to estimate incremental business value.
 
 ## Not intended use
-- Do not automatically penalize hosts.
-- Do not claim high availability is caused by any single feature.
-- Do not use as a production policy model without updated data, monitoring, fairness review, and experimentation.
 
-## Target definition
-`high_availability = 1` when `availability_365 > 165`.
+Do not interpret outputs as Airbnb's actual performance, real campaign ROI, actual Experiences demand, or true customer behavior.
 
-## Best model
-- Name: Random Forest
-- Accuracy: 0.719
-- Precision: 0.549
-- Recall: 0.733
-- F1: 0.628
-- ROC AUC: 0.800
+## Data
 
-## Data quality notes
-- Zero-price rows removed: 11
-- Missing `reviews_per_month` filled with 0: 10052
-- Missing `last_review` represented with `last_review_missing`: 10052
+- Public: `AB_NYC_2019.csv` Airbnb listing/review/availability dataset mirror.
+- Synthetic: event pressure, intent index, weather favorability, POI density, campaign spend, impressions, clicks, bookings, GBV, and margin.
 
-## Limitations
-- 2019 NYC data may not represent current Airbnb supply or post-pandemic travel behavior.
-- Availability is not the same as demand, revenue, quality, or host intent.
-- Neighbourhood one-hot features can encode location-specific historical patterns that may drift.
-- Evaluation is offline only; production use needs calibration and monitoring.
+## Methods
+
+- Borough/neighborhood feature engineering.
+- Market-date demand panel.
+- Treatment/control geo experiment simulation.
+- Difference-in-differences estimate.
+- Random forest opportunity scoring.
+
+## Validation checks
+
+- Source row count: 48,392
+- Demand panel rows: 11,700
+- Marketing panel rows: 450
+- Pretrend slope gap: 0.09 bookings/day
+
+## Main risks
+
+- Public lodging proxy may not generalize to Experiences.
+- Synthetic marketing data can demonstrate architecture but cannot prove real-world effect size.
+- Geographic confounding remains possible without stronger matched-market or synthetic-control design.

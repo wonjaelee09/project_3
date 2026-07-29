@@ -1,15 +1,19 @@
 {
-  "raw_rows": 48895,
-  "model_rows": 48884,
-  "removed_zero_price_rows": 11,
-  "target_positive_rate": 0.32323459618689143,
-  "missing_reviews_per_month_raw": 10052,
-  "missing_last_review_raw": 10052,
-  "borough_counts": {
-    "Manhattan": 21660,
-    "Brooklyn": 20095,
-    "Queens": 5666,
-    "Bronx": 1090,
-    "Staten Island": 373
-  }
+  "raw_listing_rows": 48392,
+  "demand_panel_rows": 11700,
+  "marketing_panel_rows": 450,
+  "boroughs": [
+    "Bronx",
+    "Brooklyn",
+    "Manhattan",
+    "Queens",
+    "Staten Island"
+  ],
+  "synthetic_fields": [
+    "event_pressure",
+    "intent_index",
+    "weather_favorability",
+    "campaign spend/impressions/clicks/bookings/gbv/margin"
+  ],
+  "public_source_url": "https://raw.githubusercontent.com/4GeeksAcademy/data-preprocessing-project-tutorial/main/AB_NYC_2019.csv"
 }

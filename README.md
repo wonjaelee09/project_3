@@ -1,59 +1,39 @@
-# NYC Airbnb Availability Classification
+# Airbnb Experiences Demand Signal & Incrementality Engine
 
-This repo has been rebuilt from the original Project 3 notebook into a reproducible, end-to-end data science project.
+A role-targeted data science portfolio project for Airbnb's **Data Scientist, Platform — MarTech Data Science Measurement** role.
 
 ## Business question
 
-Can we predict whether a New York City Airbnb listing will have **more than 165 available days per year**?
+**Where should Airbnb scale marketing for Experiences because public demand signals suggest incremental bookings, GBV, and contribution margin — not just attributed demand?**
 
-Why this matters: high availability can signal under-demanded supply, professionalized inventory, pricing/listing-quality issues, or inventory that does not behave like scarce “Airbnb experience” supply. The model is designed to help prioritize investigation and marketplace interventions — not to make automatic host decisions.
+This replaces the older NYC Airbnb availability classifier. The old project was Airbnb-themed, but it did not strongly demonstrate MarTech measurement, causal inference, experimentation, or marketing ROI decisioning.
 
-## Data source
+## Why this matches the Airbnb MarTech Measurement role
 
-The original notebook referenced `AB_NYC_2019.csv` from the public NYC Airbnb dataset. The rebuilt pipeline downloads the dataset from a public mirror of the Inside Airbnb / Kaggle-style 2019 NYC Airbnb dataset:
-
-```text
-https://raw.githubusercontent.com/4GeeksAcademy/data-preprocessing-project-tutorial/main/AB_NYC_2019.csv
-```
-
-The original project artifacts are preserved under `legacy/`.
-
-## What changed in this rebuild
-
-| Original state | Rebuilt state |
+| JD / role signal | Project artifact |
 |---|---|
-| Notebook-only analysis | Reproducible Python pipeline in `src/run_pipeline.py` |
-| Local missing CSV dependency | Script downloads raw data automatically |
-| PostgreSQL notebook with local credentials | SQLite warehouse in `data/warehouse/nyc_airbnb.db` |
-| Accuracy-heavy model comparison | Accuracy, precision, recall, F1, ROC AUC, confusion matrix |
-| Limited project structure | Organized `data/`, `figures/`, `reports/`, `sql/`, `agents/`, `legacy/` |
-| Slide/notebook artifacts at root | Preserved in `legacy/` |
-| No validation rubric | Hiring-manager validation agent + automated validator |
+| Optimize marketing ROI | `reports/executive_recommendation.md`, iROAS, incremental GBV, contribution margin |
+| Causal inference | Geo difference-in-differences estimate in `src/run_pipeline.py` |
+| Experimentation | Synthetic holdout/treatment campaign layer by borough/date/segment |
+| Customer relationship modeling | Traveler segment, intent score, expected LTV, price sensitivity, event affinity |
+| SQL / database usage | SQLite warehouse at `data/warehouse/airbnb_experiences_incrementality.db` and `sql/measurement_queries.sql` |
+| Data analysis / feature engineering | Demand signal panel using Airbnb supply/review proxies, event/intent/weather/holiday signals |
+| Methodological rigor | Pretrend diagnostic, confidence interval, model card, limitations |
+| Cross-functional communication | Marketing, Finance, Product, and Engineering recommendations |
+| Thought leadership | `reports/measurement_whitepaper.md` |
+| Agentic coding / self-validation | `agents/hiring_manager_agent.md`, `src/validate_project.py` |
 
-## Project structure
+## Data design
 
-```text
-project_3/
-├── README.md
-├── pyproject.toml
-├── kanban.md
-├── agents/
-│   └── hiring_manager_agent.md
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── warehouse/
-├── figures/
-├── legacy/
-│   ├── notebooks/
-│   └── slides/
-├── reports/
-├── sql/
-│   └── availability_model_queries.sql
-└── src/
-    ├── run_pipeline.py
-    └── validate_project.py
-```
+Real Airbnb campaign/customer/Experiences data is private, so the project deliberately separates:
+
+1. **Public Airbnb-adjacent outcome layer** — NYC Airbnb listing data from a public mirror of the Inside Airbnb / Kaggle-style `AB_NYC_2019.csv` dataset. Used to infer borough/neighborhood supply, price, review velocity, availability, and revenue opportunity proxies.
+2. **Demand signal layer** — reproducible signals calibrated from public Airbnb supply/review patterns: event pressure, travel intent index, weather favorability, holiday/weekend flags, and experience category affinity.
+3. **Private marketing measurement layer — synthetic by necessity** — campaign spend, impressions, clicks, treatment/holdout assignment, and bookings are simulated because true Airbnb marketing exposure and conversion data is not public.
+
+## KPIs
+
+Experiences bookings proxy, GBV, contribution margin, incremental bookings, incremental GBV, incremental contribution margin, iROAS, conversion rate, cost per incremental booking, demand signal score, experience attach-rate proxy, and market opportunity score.
 
 ## Quickstart
 
@@ -63,73 +43,20 @@ uv run python src/run_pipeline.py
 uv run python src/validate_project.py
 ```
 
-If you do not use `uv`, create a virtual environment and install the dependencies from `pyproject.toml`.
+## Expected outputs
 
-## Outputs
+- `data/processed/neighborhood_demand_panel.csv`
+- `data/processed/marketing_experiment_panel.csv`
+- `data/processed/experience_opportunity_scores.csv`
+- `data/processed/decision_metrics.csv`
+- `data/warehouse/airbnb_experiences_incrementality.db`
+- `figures/*.png`
+- `reports/executive_recommendation.md`
+- `reports/measurement_whitepaper.md`
+- `reports/model_card.md`
+- `reports/hiring_manager_validation.md`
+- `reports/index.html`
 
-After running the pipeline:
+## Important caveat
 
-- `data/raw/AB_NYC_2019.csv` — downloaded raw data, ignored by git.
-- `data/processed/listings_model.csv` — cleaned modeling table.
-- `data/processed/model_metrics.csv` — model comparison metrics.
-- `data/processed/feature_importance.csv` — top model drivers.
-- `data/warehouse/nyc_airbnb.db` — SQLite warehouse.
-- `figures/*.png` — model and EDA figures.
-- `reports/executive_summary.md` — stakeholder-facing recommendation.
-- `reports/model_card.md` — intended use, limitations, and model details.
-- `reports/index.html` — phone/laptop-friendly visual report.
-- `reports/hiring_manager_validation.md` — automated portfolio review.
-
-## Current modeling approach
-
-Target:
-
-```text
-high_availability = 1 if availability_365 > 165 else 0
-```
-
-Candidate models:
-
-- Dummy baseline
-- Logistic Regression
-- Decision Tree
-- Random Forest
-
-Feature families:
-
-- borough / neighbourhood
-- room type
-- latitude / longitude
-- log price
-- minimum nights
-- review volume and review intensity
-- host listing count and multi-listing flags
-- missing last-review signal
-
-## SQL examples
-
-```bash
-sqlite3 data/warehouse/nyc_airbnb.db < sql/availability_model_queries.sql
-```
-
-The SQL file includes:
-
-- high-availability rate by borough
-- room-type / borough cuts
-- multi-listing host signal
-
-## Portfolio / interview framing
-
-Strong distinction to say out loud:
-
-> This is a predictive marketplace model, not a causal model. It can identify which listings deserve attention, but business interventions still need experimentation to estimate incremental impact.
-
-## Next improvements
-
-See `kanban.md`. Highest-value next additions:
-
-1. SHAP or permutation importance.
-2. Fairness/sensitivity cuts by borough and room type.
-3. Model calibration and threshold tuning.
-4. Latest Inside Airbnb data refresh and drift comparison.
-5. Small static demo or Streamlit app.
+This is a portfolio simulation. It does **not** claim to represent Airbnb's actual Experiences performance, marketing spend, conversion rates, or internal measurement systems. The purpose is to demonstrate how a MarTech Measurement data scientist would structure a decision system under realistic data constraints.

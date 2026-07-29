@@ -1,36 +1,19 @@
-# Kanban Board — NYC Airbnb Availability Classification
-
-## Backlog
-
-- [ ] Add SHAP or permutation importance for stronger interpretability.
-- [ ] Add fairness/sensitivity cuts by neighbourhood group and room type.
-- [ ] Add model calibration plot and threshold tuning for business use.
-- [ ] Add a small Streamlit or static demo for non-technical reviewers.
-- [ ] Replace 2019 snapshot with latest Inside Airbnb NYC data and compare drift.
-- [ ] Add unit tests for feature engineering edge cases.
-
-## Ready
-
-- [ ] Review generated `reports/executive_summary.md` for portfolio narrative.
-- [ ] Review `reports/model_card.md` for limitations and interview talking points.
-- [ ] Run `uv run python src/run_pipeline.py` after any code change.
-
-## In Progress
-
-_No active task._
-
-## Review / Validation
-
-- [ ] Run `uv run python src/validate_project.py` and inspect the score.
-- [ ] Confirm generated figures render correctly.
-- [ ] Confirm SQL queries run against `data/warehouse/nyc_airbnb.db`.
+# Kanban — Airbnb Experiences Demand Signal & Incrementality Engine
 
 ## Done
+- [x] Preserve original NYC Airbnb project under `legacy/`.
+- [x] Reframe Project 3 around Airbnb MarTech Measurement rather than generic listing classification.
+- [x] Build reproducible pipeline with public Airbnb-adjacent demand proxies and synthetic marketing measurement layer.
+- [x] Generate SQL warehouse, figures, executive report, whitepaper, model card, and validation report.
 
-- [x] Preserved original notebooks, slide deck, and KNN image under `legacy/`.
-- [x] Added reproducible pipeline, SQL warehouse, figures, reports, and validator.
-- [x] Added hiring-manager review agent rubric.
+## Next
+- [ ] Replace synthetic event pressure with Ticketmaster Discovery API once an API key is available.
+- [ ] Replace synthetic search intent with Wikimedia Pageviews or Google Trends extraction.
+- [ ] Add matched-market / synthetic-control estimator.
+- [ ] Add Bayesian MMM with adstock, saturation, priors, and experiment calibration.
+- [ ] Create a 5-minute walkthrough deck.
 
-## Definition of Done
-
-A task is done only when code runs end-to-end, outputs are regenerated, and validation passes.
+## Backlog
+- [ ] Add causal ML uplift model for heterogeneous treatment effects.
+- [ ] Add MDE / power calculator for campaign launch planning.
+- [ ] Expand from NYC boroughs to a multi-city panel using Inside Airbnb archives.

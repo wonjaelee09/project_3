@@ -1,0 +1,10 @@
+metric,value,interpretation
+source_listing_rows,48392.0,Public Airbnb-adjacent rows used as marketplace proxy.
+neighborhood_day_rows,11700.0,Neighborhood/date demand signal observations.
+marketing_market_day_rows,450.0,Synthetic campaign measurement observations.
+estimated_incremental_bookings,2922.507266879409,DiD estimated incremental Experiences bookings proxy.
+estimated_incremental_gbv,460168.73199334607,DiD estimated incremental GBV.
+estimated_incremental_margin,-200466.99536092734,DiD estimated incremental contribution margin after spend.
+incremental_roas,1.5252318645333702,Incremental GBV divided by campaign spend.
+cost_per_incremental_booking,103.2346847580695,Campaign spend per incremental booking.
+pretrend_slope_gap_bookings_per_day,0.08705729175156313,Parallel-trend diagnostic; closer to zero is better.
